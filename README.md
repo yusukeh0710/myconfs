@@ -1,0 +1,2 @@
+# myconfs
+configlist
