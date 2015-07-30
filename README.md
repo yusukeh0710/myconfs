@@ -1,2 +1,2 @@
 # myconfs
-configlist
+My config lists
