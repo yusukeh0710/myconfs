@@ -33,9 +33,7 @@ set incsearch
 " Mapping
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 
-inoremap {<Enter> {}<Left><CR><ESC><S-o><Tab>
-inoremap [<Enter> []<Left><CR><ESC><S-o><Tab>
-inoremap (<Enter> ()<Left><CR><ESC><S-o><Tab>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap <silent> jj <ESC>
 
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -121,8 +119,20 @@ command!
 noremap <silent> <F12> :<C-u>execute "PopUpTags ".expand('<cword>')<CR>
 
 " smartchr
-autocmd FileType c,cc,cpp,py inoremap  <expr> = smartchr#loop(' = ', ' == ', "=")
-autocmd FileType c,cc,cpp,py inoremap  <expr> < smartchr#loop(' < ', ' << ', '<')
-autocmd FileType c,cc,cpp,py inoremap  <expr> > smartchr#loop(' > ', ' >> ', '>')
-autocmd FileType c,cc,cpp,py inoremap  <expr> , smartchr#loop(', ', ',')
-autocmd FileType c,cc,cpp inoremap  <expr> . smartchr#loop('.', '->', '...')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> = smartchr#loop(' = ', ' == ', '=')
+"autocmd FileType c,cc,cpp inoremap <buffer><expr> ( smartchr#loop(' (', ' ((', '(')
+"autocmd FileType c,cc,cpp inoremap <buffer><expr> ) smartchr#loop(') ', ')) ', ')')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> + smartchr#one_of(' + ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> ++ smartchr#one_of('++')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> += smartchr#one_of(' += ')
+"autocmd FileType c,cc,cpp inoremap <buffer><expr> - smartchr#one_of(' - ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> -- smartchr#one_of('--')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> -= smartchr#one_of(' -= ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> != smartchr#one_of(' != ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> << smartchr#one_of(' << ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> <= smartchr#one_of(' <= ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> >> smartchr#one_of(' >> ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> >= smartchr#one_of(' >= ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> -> smartchr#one_of('->')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> , smartchr#one_of(', ', ',,')
+"autocmd FileType c,cc,cpp inoremap <buffer><expr> < search('^#include\%#', 'bcn') ? ' <' : smartchr#one_of(' < ', ' << ', '<')
