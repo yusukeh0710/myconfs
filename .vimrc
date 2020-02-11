@@ -31,7 +31,11 @@ set hlsearch
 set incsearch
 
 " Mapping
+nmap <F1> <nop>
+imap <F1> <nop>
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+nnoremap <F5> :belowright :terminal ++close bash<CR>
+nnoremap <F6> :belowright :vertical :terminal ++close bash<CR>
 
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap <silent> jj <ESC>
@@ -42,6 +46,8 @@ autocmd BufWritePre * :%s/\s\+$//ge
 autocmd QuickFixCmdPost *grep* botright cwindow
 
 cabbr w!! w !sudo tee > /dev/null %
+
+colorscheme desert
 
 "-----------------------------
 " NeoBundle
@@ -131,6 +137,8 @@ autocmd FileType c,cc,cpp inoremap <buffer><expr> += smartchr#one_of(' += ')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> -- smartchr#one_of('--')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> -= smartchr#one_of(' -= ')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> *= smartchr#one_of(' *= ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> /= smartchr#one_of(' /= ')
+autocmd FileType c,cc,cpp inoremap <buffer><expr> %= smartchr#one_of(' %= ')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> != smartchr#one_of(' != ')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> << smartchr#one_of(' << ')
 autocmd FileType c,cc,cpp inoremap <buffer><expr> <= smartchr#one_of(' <= ')
