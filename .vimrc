@@ -24,30 +24,64 @@ endif
 
 " Completion
 set wildmenu
+set wildmode=longest:full,full
 
 " View
 set showmatch
 set hlsearch
 set incsearch
+colorscheme desert
 
+"-----------------------------
 " Mapping
+"-----------------------------
+" Disables
 nmap <F1> <nop>
 imap <F1> <nop>
-nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
-nnoremap <F5> :belowright :terminal ++close bash<CR>
-nnoremap <F6> :belowright :vertical :terminal ++close bash<CR>
+vnoremap <silent> p "0p
 
+" Function button shortcut
+nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
+nnoremap <F5> :bo :terminal ++close ++rows=15 bash<CR>
+nnoremap <F6> :belowright :vertical :terminal ++close bash<CR>
+inoremap <F5> <Esc>:bo :terminal ++close ++rows=15 bash<CR>
+inoremap <F6> <Esc>:belowright :vertical :terminal ++close bash<CR>
+
+tnoremap <esc><Up> <Up>
+tnoremap <Esc> <C-w><S-n>
+
+" Completion of parenthesis
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap <silent> jj <ESC>
 
-vnoremap <silent> p "0p
+" Window
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+inoremap <C-j> <Esc><C-w>j
+inoremap <C-k> <Esc><C-w>k
+inoremap <C-h> <Esc><C-w>h
+inoremap <C-l> <Esc><C-w>l
+tnoremap <C-j> <C-w>j
+tnoremap <C-k> <C-w>k
+nnoremap - <C-w>-
+nnoremap + <C-w>+
 
-autocmd BufWritePre * :%s/\s\+$//ge
-autocmd QuickFixCmdPost *grep* botright cwindow
 
+" Save :
+" Append below commands in .bashrc
+" bind -r '\C-s'
+" stty -ixon
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>
 cabbr w!! w !sudo tee > /dev/null %
 
-colorscheme desert
+"-----------------------------
+" Auto Command
+"-----------------------------
+autocmd BufWritePre * :%s/\s\+$//ge
+autocmd QuickFixCmdPost *grep* botright cwindow
 
 "-----------------------------
 " NeoBundle
