@@ -44,11 +44,13 @@ vnoremap <silent> p "0p
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 nnoremap <F5> :bo :terminal ++close ++rows=15 bash<CR>
 nnoremap <F6> :belowright :vertical :terminal ++close bash<CR>
+nnoremap <F10> :ClangFormat<CR>
 inoremap <F5> <Esc>:bo :terminal ++close ++rows=15 bash<CR>
 inoremap <F6> <Esc>:belowright :vertical :terminal ++close bash<CR>
 
-tnoremap <esc><Up> <Up>
-tnoremap <Esc> <C-w><S-n>
+"tnoremap <esc><Up> <Up>
+"tnoremap <Esc> <C-w><S-n>
+tnoremap <Esc><Esc> <C-\><C-n>
 
 " Completion of parenthesis
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
@@ -80,8 +82,15 @@ cabbr w!! w !sudo tee > /dev/null %
 "-----------------------------
 " Auto Command
 "-----------------------------
+" autocmd BufWritePre *.{c,cc,py,html,js,json} :%s/\s\+$//ge
 autocmd BufWritePre * :%s/\s\+$//ge
 autocmd QuickFixCmdPost *grep* botright cwindow
+
+"-----------------------------
+" Syntax Hilight
+"-----------------------------
+syn keyword cppType vector string
+syn keyword cppStatement const override
 
 "-----------------------------
 " NeoBundle
@@ -109,6 +118,7 @@ if has('vim_starting')
     NeoBundle "tsukkee/unite-tag.git"
     NeoBundle "vim-scripts/a.vim.git"
     NeoBundleLazy 'kana/vim-smartchr',  { 'autoload' : {'insert' : '1'} }
+    NeoBundle 'rhysd/vim-clang-format'
   call neobundle#end()
   NeoBundleCheck
 endif
@@ -148,6 +158,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."<C-h>"
 " By TAB key and Enter key, select completion candidate.
 imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
 imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : "<CR>"
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
 
 
 "-----------------------------
