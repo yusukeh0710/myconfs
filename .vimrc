@@ -44,7 +44,8 @@ vnoremap <silent> p "0p
 nnoremap <F3> :<C-u>setlocal relativenumber!<CR>
 nnoremap <F5> :bo :terminal ++close ++rows=15 bash<CR>
 nnoremap <F6> :belowright :vertical :terminal ++close bash<CR>
-nnoremap <F10> :ClangFormat<CR>
+autocmd FileType c,cc,cpp nnoremap <F10> :ClangFormat<CR>
+autocmd FileType python nnoremap <F10> :!black %<CR>
 inoremap <F5> <Esc>:bo :terminal ++close ++rows=15 bash<CR>
 inoremap <F6> <Esc>:belowright :vertical :terminal ++close bash<CR>
 
@@ -119,6 +120,8 @@ if has('vim_starting')
     NeoBundle "vim-scripts/a.vim.git"
     NeoBundleLazy 'kana/vim-smartchr',  { 'autoload' : {'insert' : '1'} }
     NeoBundle 'rhysd/vim-clang-format'
+    NeoBundle 'prettier/vim-prettier'
+    NeoBundle 'psf/black'
   call neobundle#end()
   NeoBundleCheck
 endif
