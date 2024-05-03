@@ -31,6 +31,7 @@ set showmatch
 set hlsearch
 set incsearch
 colorscheme desert
+set syntax=cpp.vim
 
 "-----------------------------
 " Mapping
@@ -86,12 +87,6 @@ cabbr w!! w !sudo tee > /dev/null %
 " autocmd BufWritePre *.{c,cc,py,html,js,json} :%s/\s\+$//ge
 autocmd BufWritePre * :%s/\s\+$//ge
 autocmd QuickFixCmdPost *grep* botright cwindow
-
-"-----------------------------
-" Syntax Hilight
-"-----------------------------
-syn keyword cppType vector string
-syn keyword cppStatement const override
 
 "-----------------------------
 " NeoBundle
