@@ -1,0 +1,204 @@
+snippet __builtin_popcount
+        __builtin_popcount(${1})
+
+snippet KMOD
+        constexpr int kMod = 1000000007;
+snippet KMOD2
+        constexpr int kMod = 998244353;
+snippet KINF
+        constexpr int kInf = 1e9;
+snippet KINFL
+        constexpr LL kInf = 1e18;
+
+snippet debug
+
+        template<class T, class... Ts>
+        void debug(const T& a, const Ts&... b){
+          cout << a;
+          (cout << ... << (cout << ' ', b));
+          cout << endl;
+        }
+
+snippet istream_vector
+
+        template<typename T>
+        istream& operator >> (istream& is, vector<T>& vs){
+          for(T& v: vs) is >> v;
+          return is;
+        }
+
+snippet ostream_vector
+
+        template<typename T>
+        ostream& operator << (ostream& os, const vector<T>& vs){
+          for (const T& v : vs) os << v << " ";
+          return os;
+        }
+
+snippet ostream_set
+
+        template<typename T>
+        ostream& operator << (ostream& os, const set<T>& vs){
+          for (const T& v : vs) os << v << " ";
+          return os;
+        }
+
+snippet ostream_map
+
+        template<typename T1, typename T2>
+        ostream& operator << (ostream& os, const map<T1, T2>& m){
+          for (const auto [k, v] : m) os << "{" << k << "," << v << "} ";
+          return os;
+        }
+
+snippet istream_pair
+
+        template<typename T1, typename T2>
+        istream& operator >> (istream& is, pair<T1, T2>& p){
+          is >> p.first >> p.second;
+          return is;
+        }
+
+snippet ostream_pair
+
+        template<typename T1, typename T2>
+        ostream& operator << (ostream& os, const pair<T1, T2>& p){
+          os << "{" << p.first << "," << p.second << "} ";
+          return os;
+        }
+
+snippet struct
+
+        struct ${1} {
+          int a;
+          bool operator<(const ${1} &right) const {
+            return a < right.a;
+          }
+        };
+
+snippet vvector_declare
+        vector<vector<${1}>> ${2};
+snippet vvector_declare_init
+        vector<vector<${1}>> ${2}(${3}, vector<$1>(${4}, ${5}));
+snippet vvector_resize
+        ${1}.resize(${2}, vector<${3}>(${4}, ${5}));
+snippet make_ndvector
+
+        template<typename T>
+        auto makeNdVector(int n) {
+          return vector<T>(n);
+        }
+
+        template<typename T, typename N, typename... Tail>
+        auto makeNdVector(const N& n, const Tail&... tail) {
+          auto vec = makeNdVector<T>(tail...);
+          vector<decltype(vec)> vecs(n, vec);
+          return vecs;
+        }
+snippet make_ndvector_with_init
+
+        template<typename T>
+        auto makeNdVector(int n, const T& v) {
+          return vector<T>(n, v);
+        }
+
+        template<typename T, typename N, typename... Tail>
+        auto makeNdVector(const N& n, const Tail&... tail) {
+          auto vec = makeNdVector<T>(tail...);
+          vector<decltype(vec)> vecs(n, vec);
+          return vecs;
+        }
+
+snippet priority_queue
+        priority_queue<${1}>
+
+snippet priority_queue_reverse
+        priority_queue<${1}, vector<$1>, greater<$1>>
+
+snippet sort
+        sort(${1}.begin(), $1.end());
+
+snippet lower_bound
+        lower_bound(${1}.begin(), $1.end(), $2);
+
+snippet upper_bound
+        upper_bound(${1}.begin(), $1.end(), $2);
+
+snippet accumulate
+        accumulate(${1}.begin(), $1.end(), 0LL);
+
+snippet repeat
+        for (int ${1} : range(0, ${2:end})) {
+          ${3:body}
+        }
+snippet reverse_repeat
+        for (int ${1} = ${2} - 1; $1 >= 0; --$1) {
+        }
+
+snippet mod_operations
+
+        LL add(LL a, LL b) { return (a + b) % kMod; }
+        LL sub(LL a, LL b) { return (a - b + kMod) % kMod; }
+        LL mul(LL a, LL b) { return (a * b) % kMod; }
+        void addref(LL& a, LL b) { a = add(a, b); }
+        void subref(LL& a, LL b) { a = sub(a, b); }
+        void mulref(LL& a, LL b) { a = mul(a, b); }
+snippet mod_operations_div
+
+        LL add(LL a, LL b) { return (a + b) % kMod; }
+        LL sub(LL a, LL b) { return (a - b + kMod) % kMod; }
+        LL mul(LL a, LL b) { return (a * b) % kMod; }
+        void addref(LL& a, LL b) { a = add(a, b); }
+        void subref(LL& a, LL b) { a = sub(a, b); }
+        void mulref(LL& a, LL b) { a = mul(a, b); }
+
+        LL modpow(LL a, LL b) {
+          LL r = 1;
+          while (b) {
+            if (b % 2 == 1) r = mul(r, a);
+            a = mul(a, a);
+            b /= 2;
+          }
+          return r;
+        }
+        LL modinv(LL a) { return modpow(a, kMod - 2);}
+        LL moddiv(LL a, LL b) { return mul(a, modinv(b)); }
+        void moddivr(LL& a, LL b) { a = moddiv(a, b); }
+
+snippet directions
+
+        vector<pair<int, int>> ds = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+snippet chmin
+        template<typename T>
+        void chmin(T& a, T b) { a = min(a, b); }
+
+snippet chmax
+        template<typename T>
+        void chmax(T& a, T b) { a = max(a, b); }
+
+snippet range_repeat
+        range(${1})) {
+          ${2:body}
+        }
+
+snippet vvi
+        vector<vector<${1}>> ${2:var}
+
+snippet BFS_LOOP
+        deque<pair<int, int>> que;
+        vector<pair<int, int>> ds = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        que.push_back();
+        while (!que.empty()) {
+          auto [r, c] = que.front(); que.pop_front();
+          for (auto [dr, dc] : ds) {
+            int nr = r + dr;
+            int nc = c + dc;
+            if (nr < 0 || H <= nr || nc < 0 || W <= nc) continue;
+            if () continue;
+
+            if () {
+              que.push_back({nr, nc});
+            }
+          }
+        }
