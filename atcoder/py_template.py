@@ -1,0 +1,5 @@
+N = int(input())
+A = list(map(int, input().split()))
+B = list(map(float, input().split()))
+A, B = map(int, input().split())
+exit()
